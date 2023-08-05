@@ -1,0 +1,19 @@
+.main {
+  min-height: 93vh;
+  display: flex;
+  align-items: center;
+}
+.intro-text {
+  width: 100%;
+  text-align: center;
+}
+.buttonContainer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.landingButton {
+  width: 150px;
+  height: 55px;
+}

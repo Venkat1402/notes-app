@@ -1,0 +1,17 @@
+.accordion-button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+.accordion-button:focus {
+  outline: none;
+}
+.note-title {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+  .note-title {
+    font-size: 12px;
+  }
+}

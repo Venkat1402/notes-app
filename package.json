@@ -1,0 +1,32 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "A full stack MERN application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Venkat1402/notes-app.git"
+  },
+  "author": "Venkat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Venkat1402/notes-app/issues"
+  },
+  "homepage": "https://github.com/Venkat1402/notes-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}

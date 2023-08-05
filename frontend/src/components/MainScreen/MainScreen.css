@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
+
+.mainBackground {
+  min-height: 93vh;
+  display: flex;
+  padding: 10px;
+}
+.page {
+  width: 100%;
+}
+.heading {
+  /* font-family: "Ubuntu", sans-serif; */
+  font-family: "Work Sans", sans-serif;
+}
