@@ -1,8 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const notes = require("./dummyData/notes");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const noteRoutes = require("./routes/noteRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 dotenv.config();
@@ -21,14 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoutes);
 
-app.get("/api/notes", (req, res) => {
-  res.json(notes);
-});
-
-// app.get("/api/notes/:id", (req, res) => {
-//   const note = notes.find((n) => n._id === req.params.id);
-//   res.send(note);
-// });
+app.use("/api/notes", noteRoutes);
 
 // Error Handling middlewares
 // define error-handling middleware last, after other app.use() and routes calls

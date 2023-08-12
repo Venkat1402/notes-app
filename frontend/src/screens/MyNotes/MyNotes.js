@@ -12,12 +12,10 @@ const MyNotes = () => {
     setNotes(response.data);
   };
   console.log("notes", notes);
-  let count = 0;
+
   useEffect(() => {
     fetchNotes();
-    count++;
   }, []);
-  console.log("count", count);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete")) {
