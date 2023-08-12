@@ -1,52 +1,40 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import { useDispatch, useSelector } from "react-redux";
 import MainScreen from "../../components/MainScreen/MainScreen";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { login } from "../../actions/userActions";
 
-const LoginScreen = () => {
+const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, errorMessage, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [history, userInfo]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValidated(true);
-    setErrorMessage("");
+
     if (event.target[0].value === "" || event.target[1].value === "") {
       return;
     }
-
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      setLoading(true);
-      const { data } = await axios.post(
-        "/api/users/login",
-        { email, password },
-        config
-      );
-      console.log("data", JSON.stringify(data));
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
-      setLoading(false);
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
-      setValidated(false);
-      setLoading(false);
-    }
+    dispatch(login(email, password));
   };
 
   return (
@@ -63,7 +51,7 @@ const LoginScreen = () => {
               aria-describedby="inputGroupPrepend"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
             />
             <Form.Control.Feedback type="invalid">
               Please enter your correct email address.

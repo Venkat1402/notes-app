@@ -13,9 +13,9 @@ const App = () => {
       <Header />
       <main className="App">
         <Route path="/" exact component={Landingpage} />
-        <Route path="/register" exact component={() => <RegisterScreen />} />
-        <Route path="/login" exact component={() => <LoginScreen />} />
-        <Route path="/mynotes" exact component={() => <MyNotes />} />
+        <Route path="/register" exact component={RegisterScreen} />
+        <Route path="/login" exact component={LoginScreen} />
+        <Route path="/mynotes" exact component={MyNotes} />
         {/* <Landingpage /> */}
       </main>
       <Footer />
