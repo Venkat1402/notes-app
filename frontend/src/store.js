@@ -5,10 +5,20 @@ import {
   userLoginReducer,
   userRegistrationReducer,
 } from "./reducers/userReducer";
+import {
+  noteCreateReducer,
+  noteDeleteReducer,
+  noteListReducer,
+  noteUpdateReducer,
+} from "./reducers/notesReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegistrationReducer,
+  noteList: noteListReducer,
+  noteCreate: noteCreateReducer,
+  noteUpdate: noteUpdateReducer,
+  noteDelete: noteDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

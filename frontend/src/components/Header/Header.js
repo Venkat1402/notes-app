@@ -11,9 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../actions/userActions";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.userLogin);
+  const { userInfo } = useSelector((state) => state.userLogin);
 
   const history = useHistory();
   const logoutHandler = () => {
@@ -35,36 +35,42 @@ const Header = () => {
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"
-                // onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </Form>
           </Nav>
           <Nav>
-            <>
-              <Nav.Link>
-                <Link to="/mynotes">My Notes</Link>
-              </Nav.Link>
-              <NavDropdown title={`Venkat`} id="collasible-nav-dropdown">
-                <NavDropdown.Item href="/profile">
-                  {/* <img
+            {userInfo ? (
+              <>
+                <Nav.Link>
+                  <Link to="/mynotes">My Notes</Link>
+                </Nav.Link>
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/profile">
+                    {/* <img
                     alt=""
                     src={`${userInfo.pic}`}
                     width="25"
                     height="25"
                     style={{ marginRight: 10 }}
                   /> */}
-                  My Profile
-                </NavDropdown.Item>
+                    My Profile
+                  </NavDropdown.Item>
 
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </>
-            <Nav.Link>
-              <Link to="/login">Login</Link>
-            </Nav.Link>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link>
+                <Link to="/login">Login</Link>
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
