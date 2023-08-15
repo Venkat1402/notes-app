@@ -32,7 +32,6 @@ export const listNotes = () => async (dispatch, getState) => {
 
     dispatch({ type: NOTES_LIST_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: NOTES_LIST_FAIL,
       payload:
@@ -67,7 +66,6 @@ export const createNoteAction =
 
       dispatch({ type: NOTES_CREATE_SUCCESS, payload: data });
     } catch (error) {
-      console.log(error);
       dispatch({
         type: NOTES_CREATE_FAIL,
         payload:
@@ -82,11 +80,11 @@ export const updateNoteAction =
   (id, title, content, category) => async (dispatch, getState) => {
     try {
       dispatch({ type: NOTES_UPDATE_REQUEST });
-      console.log(id, title, content, category);
+
       const {
         userLogin: { userInfo },
       } = getState();
-      console.log(userInfo);
+
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -102,7 +100,6 @@ export const updateNoteAction =
 
       dispatch({ type: NOTES_UPDATE_SUCCESS, payload: data });
     } catch (error) {
-      console.log(error);
       dispatch({
         type: NOTES_UPDATE_FAIL,
         payload:

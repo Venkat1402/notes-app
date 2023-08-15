@@ -7,6 +7,7 @@ import "./MyNotes.css";
 import { deleteNoteAction, listNotes } from "../../actions/notesActions";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ReactMarkdown from "react-markdown";
 
 const MyNotes = ({ search }) => {
   const dispatch = useDispatch();
@@ -27,10 +28,9 @@ const MyNotes = ({ search }) => {
     success: deleteSuccess,
   } = noteDelete;
 
-  console.log("notes", notes);
   const history = useHistory();
+
   useEffect(() => {
-    console.log("useEffect running");
     dispatch(listNotes());
     if (!userInfo) {
       history.push("/");
@@ -56,7 +56,7 @@ const MyNotes = ({ search }) => {
         <Button size="lg">Create New Note</Button>
       </Link>
       <p className="m-2 display-5">
-        To view the note, please click on the <strong>title</strong>.
+        To view the note, please click on the <strong>note title</strong>.
       </p>
       {loading && <LoadingSpinner />}
       {deleteLoading && <LoadingSpinner />}
@@ -113,11 +113,11 @@ const MyNotes = ({ search }) => {
                         </Badge>
                       </h4>
                       <blockquote className="blockquote mb-0">
-                        <p>{note.content}</p>
+                        <ReactMarkdown>{note.content}</ReactMarkdown>
                         <footer className="blockquote-footer">
                           Created on{" "}
                           <cite title="Source Title">
-                            {note.createdAt.substring(0, 10)}
+                            {note.createdAt.substring(0, 10)}{" "}
                           </cite>
                         </footer>
                       </blockquote>

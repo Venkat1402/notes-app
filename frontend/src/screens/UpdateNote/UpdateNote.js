@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen/MainScreen";
 import axios from "axios";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, updateNoteAction } from "../../actions/notesActions";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -9,6 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ReactMarkdown from "react-markdown";
 
 function UpdateNote({ match, history }) {
+  const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [category, setCategory] = useState();
@@ -59,6 +60,16 @@ function UpdateNote({ match, history }) {
 
   const updateHandler = (e) => {
     e.preventDefault();
+    setValidated(true);
+
+    if (
+      e.target[0].value === "" ||
+      e.target[1].value === "" ||
+      e.target[2].value === ""
+    ) {
+      return;
+    }
+
     dispatch(updateNoteAction(match.params.id, title, content, category));
     if (!title || !content || !category) return;
 
@@ -71,30 +82,42 @@ function UpdateNote({ match, history }) {
       <Card>
         <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
-          <Form onSubmit={updateHandler}>
+          <Form noValidate validated={validated} onSubmit={updateHandler}>
             {loading && <LoadingSpinner />}
             {loadingDelete && <LoadingSpinner />}
             {error && <ErrorMessage>{error}</ErrorMessage>}
             {errorDelete && <ErrorMessage>{errorDelete}</ErrorMessage>}
             <Form.Group controlId="title" className="mb-2">
               <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="title"
-                placeholder="Enter the title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+              <InputGroup hasValidation>
+                <Form.Control
+                  type="title"
+                  placeholder="Enter the title"
+                  value={title}
+                  required
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter the title.
+                </Form.Control.Feedback>
+              </InputGroup>
             </Form.Group>
 
             <Form.Group controlId="content" className="mb-2">
               <Form.Label>Content</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Enter the content"
-                rows={4}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
+              <InputGroup hasValidation>
+                <Form.Control
+                  as="textarea"
+                  placeholder="Enter the content"
+                  required
+                  rows={4}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter the content.
+                </Form.Control.Feedback>
+              </InputGroup>
             </Form.Group>
             {content && (
               <Card className="mb-2">
@@ -107,12 +130,18 @@ function UpdateNote({ match, history }) {
 
             <Form.Group controlId="content" className="mb-3">
               <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="content"
-                placeholder="Enter the Category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
+              <InputGroup hasValidation>
+                <Form.Control
+                  type="content"
+                  placeholder="Enter the Category"
+                  required
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter the category.
+                </Form.Control.Feedback>
+              </InputGroup>
             </Form.Group>
             <Button variant="primary" type="submit">
               Update Note

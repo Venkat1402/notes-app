@@ -33,7 +33,6 @@ const RegisterScreen = ({ history }) => {
   }, [history, userInfo]);
 
   const handleSubmit = async (event) => {
-    console.log(name, email, password, confirmPassword, profilePicture);
     event.preventDefault();
     setValidated(true);
     setErrorMessage("");
@@ -52,7 +51,16 @@ const RegisterScreen = ({ history }) => {
       );
       return;
     }
-    dispatch(register(name, email, password, profilePicture));
+    // TODO need to update profile picture functionality
+    // sending constant URL instead of profile picture
+    dispatch(
+      register(
+        name,
+        email,
+        password,
+        "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG.png"
+      )
+    );
   };
 
   return (

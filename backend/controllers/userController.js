@@ -59,4 +59,36 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, authUser };
+const updateUserProfile = asyncHandler(async (req, res) => {
+  // Find the user.
+  const user = await User.findById(req.user._id);
+
+  // Update the details which are sent in req.body(payload) else assign the same previous value
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.profilePicture = req.body.profilePicture || user.profilePicture;
+    // updated password only if it is sent in req.body
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    // save the updaed user
+    const updatedUser = await user.save();
+
+    // send the response without password
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      profilePicture: updatedUser.profilePicture,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+});
+
+module.exports = { registerUser, authUser, updateUserProfile };
