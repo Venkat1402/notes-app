@@ -2,6 +2,9 @@ const asyncHandler = require("express-async-handler"); // middleware to handle e
 const User = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
+//@description     Register new user
+//@route           POST /api/users/
+//@access          Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, profilePicture } = req.body;
 
@@ -34,6 +37,9 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+//@description     Auth the user
+//@route           POST /api/users/login
+//@access          Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -59,6 +65,9 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    GET user profile
+// @route   GET /api/users/profile
+// @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   // Find the user.
   const user = await User.findById(req.user._id);
