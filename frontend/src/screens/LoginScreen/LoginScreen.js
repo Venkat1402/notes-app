@@ -74,12 +74,15 @@ const LoginScreen = ({ history }) => {
         </Form.Group>
 
         <Button type="submit" className="mb-3">
-          Submit form
+          Login
         </Button>
       </Form>
       <Row>
         <Col>
-          New Customer ? <Link to="/register">Register Here</Link>
+          New Customer ?{" "}
+          <Link to="/register" className="text-primary">
+            Register Here
+          </Link>
         </Col>
       </Row>
     </MainScreen>

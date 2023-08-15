@@ -143,12 +143,15 @@ const RegisterScreen = ({ history }) => {
         </Form.Group>
 
         <Button type="submit" className="mb-3">
-          Submit form
+          Register
         </Button>
       </Form>
       <Row>
         <Col>
-          Already have an account ? <Link to="/login">Login Here</Link>
+          Already have an account ?{" "}
+          <Link to="/login" className="text-primary">
+            Login Here
+          </Link>
         </Col>
       </Row>
     </MainScreen>

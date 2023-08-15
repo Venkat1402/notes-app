@@ -135,7 +135,7 @@ const ProfileScreen = ({ history }) => {
             </Form.Group> */}
 
             <Button type="submit" className="mb-3">
-              Submit form
+              Update Profile
             </Button>
           </Form>
         </Col>
