@@ -14,7 +14,7 @@ import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 const App = () => {
   const [search, setSearch] = useState("");
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <Header setSearch={setSearch} />
       <main className="App">
         <Route path="/" exact component={Landingpage} />
