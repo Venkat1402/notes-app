@@ -51,7 +51,9 @@ const MyNotes = ({ search }) => {
   };
 
   return (
-    <MainScreen title={`Welcome back ${userInfo.name}, here are your notes...`}>
+    <MainScreen
+      title={`Welcome back ${userInfo?.name}, here are your notes...`}
+    >
       <Link to="/createnote">
         <Button size="lg">Create New Note</Button>
       </Link>
