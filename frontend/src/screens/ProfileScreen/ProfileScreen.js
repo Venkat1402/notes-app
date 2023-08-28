@@ -44,6 +44,15 @@ const ProfileScreen = ({ history }) => {
     setValidated(true);
     setErrorMessage("");
 
+    if (
+      event.target[0].value === "" ||
+      event.target[1].value === "" ||
+      event.target[2].value === "" ||
+      event.target[3].value === ""
+    ) {
+      return;
+    }
+
     if (password !== confirmPassword) {
       setErrorMessage(
         "Password and Confirm Password dosen't match. Please try again."
@@ -69,20 +78,22 @@ const ProfileScreen = ({ history }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter Name"
+                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
-                please enter your correct password.
+                please enter your user name.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group md="4" controlId="validationEmail" className="mb-1">
+            <Form.Group md="4" controlId="validationEmail" className="mb-3">
               <Form.Label>Email Address</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
                   type="email"
                   placeholder="Enter Email"
                   aria-describedby="inputGroupPrepend"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 />
@@ -98,6 +109,7 @@ const ProfileScreen = ({ history }) => {
                 type="password"
                 placeholder="Enter Password"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
@@ -112,8 +124,9 @@ const ProfileScreen = ({ history }) => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
-                required={password !== ""}
+                // required={password !== ""}
                 placeholder="Enter Password"
+                required
                 value={confirmPassword}
                 onChange={(e) => {
                   setErrorMessage("");
@@ -134,7 +147,7 @@ const ProfileScreen = ({ history }) => {
               />
             </Form.Group> */}
 
-            <Button type="submit" className="mb-3">
+            <Button type="submit" className="mb-3 mt-3">
               Update Profile
             </Button>
           </Form>
