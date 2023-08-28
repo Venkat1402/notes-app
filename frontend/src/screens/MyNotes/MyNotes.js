@@ -31,10 +31,10 @@ const MyNotes = ({ search }) => {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(listNotes());
     if (!userInfo) {
       history.push("/");
     }
+    dispatch(listNotes());
   }, [
     dispatch,
     history,
